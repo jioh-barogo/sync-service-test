@@ -1,0 +1,102 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "net.devh.boot.grpc.examples.lib";
+option java_outer_classname = "HelloWorldProto";
+
+// The greeting service definition.
+service Simple {
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply) {
+  }
+  rpc TestParam (TestRequest) returns (TestResponse) {
+  }
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+  int32 name = 1;
+}
+
+// The response message containing the greetings
+message HelloReply {
+  string message = 1;
+}
+
+// The request message containing the user's name.
+message TestRequest {
+  string partnerOrderId = 1;
+  string orderAgencyOrderId = 2;
+  string orderAgencyTodayOrderId = 3;
+  string partnerStoreId = 4;
+  string dropJibunAddress = 5;
+  string dropRoadAddress = 6;
+  string dropAddressDetail = 7;
+  string dropLocation = 8;
+  string dropAddressInfo = 9;
+  string customerPhone = 10;
+  string ordererSubPhone = 11;
+  string customerName = 12;
+  string receiverPhone = 13;
+  string receiverSubPhone = 14;
+  string receiverName = 15;
+  int32 pickupExpectedAt = 16;
+  bool isReservation = 17;
+  int64 dropExpectedAt = 18;
+  int64 reservedOrderDisplayTime = 19;
+  int32 totalPayPrice = 20;
+  uint64 orderAmount = 21;
+  uint64 prePayAmount = 22;
+  int32 deferredPrice = 23;
+  uint64 payCashAmount = 24;
+  uint64 payCardAmount = 25;
+  uint64 taxFreePayAmount = 26;
+  string goodsNames = 27;
+  repeated string orderGoods = 28;
+  string storeOrderMemo = 29;
+  string memo = 30;
+  int64 orderAgencyOrderCreatedAt = 31;
+  string orderChannel = 32;
+  bool isUntact = 33;
+  bool shouldScanQRCodeForPickup = 34;
+  int64 timeOutAt = 35;
+}
+
+// The response message containing the greetings
+message TestResponse {
+  string partnerOrderId = 1;
+  string orderAgencyOrderId = 2;
+  string orderAgencyTodayOrderId = 3;
+  string partnerStoreId = 4;
+  string dropJibunAddress = 5;
+  string dropRoadAddress = 6;
+  string dropAddressDetail = 7;
+  string dropLocation = 8;
+  string dropAddressInfo = 9;
+  string customerPhone = 10;
+  string ordererSubPhone = 11;
+  string customerName = 12;
+  string receiverPhone = 13;
+  string receiverSubPhone = 14;
+  string receiverName = 15;
+  int32 pickupExpectedAt = 16;
+  bool isReservation = 17;
+  int64 dropExpectedAt = 18;
+  int64 reservedOrderDisplayTime = 19;
+  int32 totalPayPrice = 20;
+  uint64 orderAmount = 21;
+  uint64 prePayAmount = 22;
+  int32 deferredPrice = 23;
+  uint64 payCashAmount = 24;
+  uint64 payCardAmount = 25;
+  uint64 taxFreePayAmount = 26;
+  string goodsNames = 27;
+  repeated string orderGoods = 28;
+  string storeOrderMemo = 29;
+  string memo = 30;
+  int64 orderAgencyOrderCreatedAt = 31;
+  string orderChannel = 32;
+  bool isUntact = 33;
+  bool shouldScanQRCodeForPickup = 34;
+  int64 timeOutAt = 35;
+}

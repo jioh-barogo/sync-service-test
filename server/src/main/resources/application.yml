@@ -1,0 +1,16 @@
+server:
+  port: 8081
+
+grpc:
+  server:
+    port: 9091
+
+kafka:
+  bootstrap-servers: 127.0.0.1:9092
+  consumer-group-id: test
+  consumer-group: request.reply.group
+  topic:
+    request-topic: sync.test.request
+    request-reply-topic: sync.test.response
+  receive-partition: 5
+  send-partition: 2

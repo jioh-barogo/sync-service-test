@@ -1,0 +1,104 @@
+buildscript {
+    ext {
+        protobufVersion = '3.14.0'
+        protobufPluginVersion = '0.8.14'
+        grpcVersion = '1.35.0'
+    }
+}
+
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.2.2.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id 'com.google.protobuf' version "${protobufPluginVersion}"
+}
+
+allprojects {
+    bootJar {
+        enabled = false
+    }
+    jar {
+        enabled = true
+    }
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'eclipse'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    group = 'com.example'
+    version = '0.0.1-SNAPSHOT'
+    sourceCompatibility = '11'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.apache.kafka:kafka-streams'
+        implementation 'org.springframework.kafka:spring-kafka'
+
+        implementation 'net.devh:grpc-common-spring-boot:2.14.0.RELEASE'
+        implementation 'net.devh:grpc-client-spring-boot-starter:2.14.0.RELEASE'
+        implementation 'net.devh:grpc-server-spring-boot-starter:2.14.0.RELEASE'
+
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+        annotationProcessor 'org.projectlombok:lombok'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation 'org.springframework.kafka:spring-kafka-test'
+    }
+
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+
+}
+
+// module core 에 module api, consumer이 의존
+project(":client") {
+    bootJar {
+        enabled = false
+    }
+    jar {
+        enabled = true
+    }
+
+    dependencies {
+        // restTemplate connection pooling
+        implementation 'org.apache.httpcomponents:httpclient'
+
+        // retrofit
+        implementation('com.squareup.retrofit2:retrofit:2.5.0') {
+            exclude module: 'okhttp'
+        }
+
+        implementation 'net.devh:grpc-client-spring-boot-starter:2.14.0.RELEASE'
+
+        implementation 'com.squareup.okhttp3:okhttp:3.12.0'
+        implementation 'com.squareup.okhttp3:logging-interceptor:3.12.0'
+        implementation 'com.squareup.retrofit2:converter-jackson:2.5.0'
+        implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+        implementation project(':grpc')
+    }
+}
+
+project(":server") {
+    bootJar {
+        enabled = false
+    }
+    jar {
+        enabled = true
+    }
+    dependencies {
+        implementation 'net.devh:grpc-server-spring-boot-starter:2.14.0.RELEASE'
+        implementation project(':grpc')
+    }
+}

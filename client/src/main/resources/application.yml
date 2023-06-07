@@ -1,0 +1,26 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: local-grpc-client
+
+grpc:
+  client:
+    local-grpc-server:
+      address: 'static://127.0.0.1:9091'
+      enableKeepAlive: true
+      keepAliveWithoutCalls: true
+      negotiationType: plaintext
+
+api-server: http://localhost:8081
+
+kafka:
+  bootstrap-servers: 127.0.0.1:9092
+  consumer-group-id: test
+  consumer-group: request.reply.group
+  topic:
+    request-topic: sync.test.request
+    request-reply-topic: sync.test.response
+  receive-partition: 5
+  send-partition: 2
+  ack: 1

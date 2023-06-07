@@ -1,0 +1,4 @@
+rootProject.name = 'sync-service'
+include 'server'
+include 'client'
+include 'grpc'

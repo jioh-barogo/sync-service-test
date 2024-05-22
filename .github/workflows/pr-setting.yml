@@ -16,5 +16,5 @@ jobs:
       - name: Run PR Labeler And Assignee
         uses: kek2410/pr-labeler@v1.0.0
         with:
-          configuration-path: .github/pr-labeler.yml
+          configuration-path: .github/labeler-config.yml
           assignees: author

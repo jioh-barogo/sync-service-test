@@ -1,0 +1,3 @@
+filters:
+  - label: WAITING_REVIEW
+    events: [pull_request]
